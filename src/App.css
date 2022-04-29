@@ -1,0 +1,11 @@
+.color {
+    color: #e73c3e;
+}
+
+.bg-color {
+    background-color: #e73c3e;
+}
+
+.active {
+    color: #e73c3e !important;
+}

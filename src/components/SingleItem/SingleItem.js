@@ -1,9 +1,12 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-const singleItem = ({ item }) => {
+const SingleItem = ({ item }) => {
 
-    const { img, name, price, short_des, quantity, supplier } = item;
+    const { img, name, price, short_des, quantity, supplier, _id } = item;
+
+    const navigate = useNavigate();
 
     return (
         <Col>
@@ -19,11 +22,11 @@ const singleItem = ({ item }) => {
                     <h5>Price: <span className="color">${price}</span></h5>
                     <p className='mb-2'>Quantity: <span className="color fw-bold">{quantity}</span></p>
                     <h5>Supplier: <span className="color">{supplier}</span></h5>
-                    <button className='btn btn-lg bg-color mt-2 w-100'>Manage</button>
+                    <button onClick={() => navigate('/inventory/' + _id)} className='btn btn-lg btn-out-main mt-2 w-100'>Manage</button>
                 </div>
             </Card>
         </Col>
     );
 };
 
-export default singleItem;
+export default SingleItem;

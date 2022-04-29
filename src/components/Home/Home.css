@@ -1,0 +1,33 @@
+.banner {
+    background-image: url('https://images.unsplash.com/photo-1561214078-f3247647fc5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGd5bSUyMGVxdWlwbWVudHxlbnwwfHwwfHw%3D&auto');
+    min-height: calc(100vh - 66px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: overlay;
+}
+
+.triangle-left {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #e73c3e transparent transparent;
+}
+
+.triangle-right {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #e73c3e;
+}
+
+.arrow {
+    height: 2px;
+    width: 100px;
+    background-color: #e73c3e;
+}

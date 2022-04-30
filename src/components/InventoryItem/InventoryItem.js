@@ -61,7 +61,7 @@ const InventoryItem = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <button disabled={!quantity && true} onClick={decreaseQuantity} className='btn bg-color btn-lg'>Delivered</button>
+                    <button disabled={!quantity && true} onClick={decreaseQuantity} className='btn btn-main btn-lg'>Delivered</button>
                 </div>
             </div>
             <div className="row">

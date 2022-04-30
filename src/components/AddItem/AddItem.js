@@ -21,39 +21,45 @@ const AddItem = () => {
     }
 
     return (
-        <>
-            <form className='w-50 mx-auto mb-4 mt-3' onSubmit={handleAdd}>
-                <div className="mb-3">
-                    <label className="form-label">Name</label>
-                    <input name='name' type="text" className="form-control" required />
+        <div className='container'>
+            <div className="row">
+                <div className="col-lg-3"></div>
+                <div className="col-lg-6">
+                    <form className='mb-4 mt-3' onSubmit={handleAdd}>
+                        <div className="mb-3">
+                            <label className="form-label">Name</label>
+                            <input name='name' type="text" className="form-control" required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Email</label>
+                            <input name='email' type="email" className="form-control" />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Image URL</label>
+                            <input name='img' type="url" className="form-control" />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <textarea name='short_des' type="text" className="form-control" required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Supplier</label>
+                            <input name='supplier' type="text" className="form-control" required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Price</label>
+                            <input name='price' type="text" className="form-control" required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Quantity</label>
+                            <input name='quantity' type="text" className="form-control" required />
+                        </div>
+                        <button type="submit" className="btn btn-main btn-lg">Add Item</button>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input name='email' type="email" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Image URL</label>
-                    <input name='img' type="url" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Description</label>
-                    <textarea name='short_des' type="text" className="form-control" required />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Supplier</label>
-                    <input name='supplier' type="text" className="form-control" required />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Price</label>
-                    <input name='price' type="text" className="form-control" required />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Quantity</label>
-                    <input name='quantity' type="text" className="form-control" required />
-                </div>
-                <button type="submit" className="btn bg-color btn-lg">Submit</button>
-            </form>
-        </>
+                <div className="col-lg-3"></div>
+            </div>
+        </div>
     );
 };
 

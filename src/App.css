@@ -11,6 +11,17 @@
     color: #e73c3e !important;
 }
 
+.btn-main {
+    background-color: #e73c3e;
+    color: #fff;
+}
+
+.btn-main:hover {
+    border: 1px solid #e73c3e;
+    color: #000;
+    background-color: #fff;
+}
+
 .btn-out-main {
     border: 1px solid #e73c3e;
     color: #000;

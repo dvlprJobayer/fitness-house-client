@@ -39,3 +39,7 @@ table td {
     font-weight: 500;
     width: 50%;
 }
+
+a:hover {
+    color: #e73c3e;
+}

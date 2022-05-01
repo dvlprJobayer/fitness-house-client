@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const ManageInventories = () => {
 
@@ -7,6 +8,7 @@ const ManageInventories = () => {
 
     return (
         <div className='container'>
+            <Loading />
             <button onClick={() => navigate('/add-item')}>Add new Item</button>
         </div>
     );

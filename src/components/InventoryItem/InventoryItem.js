@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { BsArrowRightSquare } from 'react-icons/bs';
 
 const InventoryItem = () => {
 
@@ -66,7 +67,7 @@ const InventoryItem = () => {
             </div>
             <div className="row">
                 <h3 className='text-center display-5 fw-normal color mt-4'>ReStock the Item?</h3>
-                <div className="col-lg-4"></div>
+                <div className="col-lg-3"></div>
                 <div className="col-lg-4">
                     <Form onSubmit={addQuantity}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -76,7 +77,10 @@ const InventoryItem = () => {
                         <button className='btn btn-out-main btn-lg w-100'>Submit</button>
                     </Form>
                 </div>
-                <div className="col-lg-4"></div>
+                <div className="col-lg-1"></div>
+                <div className="col-lg-4 d-flex align-items-end">
+                    <Link className='btn btn-main btn-lg mt-4 w-100' to="/inventories">Manage Inventories <BsArrowRightSquare className='ms-3' /></Link>
+                </div>
             </div>
         </div>
     );

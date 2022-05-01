@@ -4,9 +4,6 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import LoginForm from '../LoginForm/LoginForm';
 
 const Login = () => {
-
-
-
     return (
         <div className='container mt-3'>
             <div className="row">

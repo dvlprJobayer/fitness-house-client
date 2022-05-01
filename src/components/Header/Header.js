@@ -5,10 +5,11 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import LoginCanvas from '../LoginCanvas/LoginCanvas';
 import { signOut } from 'firebase/auth';
+import Loading from '../Loading/Loading';
 
 const Header = () => {
 
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
     const location = useLocation();
     const [showCanvas, setShowCanvas] = useState(true);
@@ -19,6 +20,11 @@ const Header = () => {
             setShowCanvas(true);
         }
     }, [location, user]);
+    useEffect(() => {
+        if (loading) {
+            <Loading />
+        }
+    }, [loading]);
 
     return (
         <header>
@@ -31,6 +37,13 @@ const Header = () => {
                             className="me-auto ms-lg-4 my-lg-0"
                         >
                             <Nav.Link className='fw-bold text-black' as={NavLink} to="/inventories">Manage Inventories</Nav.Link>
+                            {
+                                user && <>
+                                    <Nav.Link className='fw-bold text-black' as={NavLink} to="/manage">Manage Items</Nav.Link>
+                                    <Nav.Link className='fw-bold text-black' as={NavLink} to="/add-item">Add Item</Nav.Link>
+                                    <Nav.Link className='fw-bold text-black' as={NavLink} to="/my-items">My Items</Nav.Link>
+                                </>
+                            }
                         </Nav>
                         <div>
                             {user && <p onClick={() => signOut(auth)} className="mb-0 color fw-bold" style={{ cursor: 'pointer' }}>Sign Out</p>}

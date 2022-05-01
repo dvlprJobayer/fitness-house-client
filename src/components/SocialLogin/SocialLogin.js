@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.init';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
-const SocialLogin = ({ children }) => {
+const SocialLogin = ({ children, handleCanvasClose }) => {
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user && (location.pathname === '/login' || location.pathname === '/signup')) {
+            navigate('/');
+        } else if (user) {
+            handleCanvasClose(false);
+        }
+    }, [user, handleCanvasClose, location, navigate]);
+    useEffect(() => {
+        if (loading) {
+            <Loading />
+        }
+    }, [loading]);
 
     return (
         <div className='mt-3'>

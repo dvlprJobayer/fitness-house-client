@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import auth from '../../Firebase/Firebase.init';
 import LoginCanvas from '../LoginCanvas/LoginCanvas';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
+
+    const [user, loading, error] = useAuthState(auth);
 
     const location = useLocation();
     const [showCanvas, setShowCanvas] = useState(true);
     useEffect(() => {
-        if (location.pathname === '/login' || location.pathname === '/signup') {
+        if (location.pathname === '/login' || location.pathname === '/signup' || user) {
             setShowCanvas(false);
         } else {
             setShowCanvas(true);
         }
-    }, [location]);
+    }, [location, user]);
 
     return (
         <header>
@@ -28,7 +33,7 @@ const Header = () => {
                             <Nav.Link className='fw-bold text-black' as={NavLink} to="/inventories">Manage Inventories</Nav.Link>
                         </Nav>
                         <div>
-                            {/* <Nav.Link className='fw-bold text-black ps-0' as={NavLink} to="/login">Login</Nav.Link> */}
+                            {user && <p onClick={() => signOut(auth)} className="mb-0 color fw-bold" style={{ cursor: 'pointer' }}>Sign Out</p>}
                             {showCanvas && <LoginCanvas />}
                         </div>
                     </Navbar.Collapse>

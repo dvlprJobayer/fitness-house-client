@@ -3,6 +3,7 @@ import { Offcanvas } from 'react-bootstrap';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { FiUser } from "react-icons/fi";
 import { Link } from 'react-router-dom';
+import LoginForm from '../LoginForm/LoginForm';
 
 const LoginCanvas = () => {
 
@@ -21,18 +22,7 @@ const LoginCanvas = () => {
                 </Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <div className="px-3 pt-3">
-                        <form>
-                            <div className="mb-4">
-                                <label className='form-label' htmlFor="email">Email <span className='color'>*</span></label>
-                                <input className='form-control rounded-0' id='email' type="email" name='email' />
-                            </div>
-                            <div className="mb-4">
-                                <label className='form-label' htmlFor="password">Password <span className='color'>*</span></label>
-                                <input className='form-control rounded-0' id='password' type="password" name='password' />
-                            </div>
-                            <input className='btn w-100 text-uppercase fw-bold btn-main rounded-0' type="submit" value="Log in" />
-                        </form>
-                        <p className='mt-3 mb-0 color text-center' style={{ cursor: 'pointer' }}>Lost your password?</p>
+                        <LoginForm />
                     </div>
                     <SocialLogin>
                         <div className="text-center mt-3">

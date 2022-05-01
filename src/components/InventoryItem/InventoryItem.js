@@ -43,14 +43,18 @@ const InventoryItem = () => {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>Quantity</th>
-                                <th className='color'>{quantity}</th>
+                                <td>Product id</td>
+                                <td className='color'>{item._id}</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Price</td>
                                 <td className='color'>${item.price}</td>
+                            </tr>
+                            <tr>
+                                <th>Quantity</th>
+                                <th className='color'>{quantity}</th>
                             </tr>
                             <tr>
                                 <td><h6>Supplier</h6></td>

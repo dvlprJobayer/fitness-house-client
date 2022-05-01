@@ -1,15 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase/Firebase.init';
+import Loading from '../Loading/Loading';
 
 const SignUp = () => {
 
-    const userInfo = {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [user, navigate, from]);
+
+    const [userInfo, setUserInfo] = useState({
         email: '',
         password: '',
         confirmPassword: ''
-    }
+    });
     const [userError, setUserError] = useState({
         email: '',
         password: '',
@@ -21,43 +40,47 @@ const SignUp = () => {
             const emailInput = e.target.value;
             if (emailInput === '') {
                 setUserError({ ...userError, email: 'Email is required' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, email: '' });
             } else if (/\S+@\S+\.\S+/.test(emailInput)) {
                 setUserError({ ...userError, email: '' });
-                userInfo[e.target.name] = emailInput;
+                setUserInfo({ ...userInfo, email: emailInput });
             } else {
                 setUserError({ ...userError, email: 'Invalid Email' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, email: '' });
             }
         } else if (e.target.name === 'password') {
             const passwordInput = e.target.value;
             if (passwordInput === '') {
                 setUserError({ ...userError, password: 'Password is required' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, password: '' });
             } else if (passwordInput.length > 5) {
                 setUserError({ ...userError, password: '' });
-                userInfo[e.target.name] = passwordInput;
+                setUserInfo({ ...userInfo, password: passwordInput });
             } else {
                 setUserError({ ...userError, password: 'Password is too Short' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, password: '' });
             }
         } else {
             const confirmPasswordInput = e.target.value;
             if (confirmPasswordInput === '') {
                 setUserError({ ...userError, confirmPassword: 'Confirm Password is required' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, confirmPassword: '' });
             } else if (confirmPasswordInput === userInfo.password) {
                 setUserError({ ...userError, confirmPassword: '' });
-                userInfo[e.target.name] = confirmPasswordInput;
+                setUserInfo({ ...userInfo, confirmPassword: confirmPasswordInput });
             } else {
                 setUserError({ ...userError, confirmPassword: 'Password didn\'t match' });
-                userInfo[e.target.name] = '';
+                setUserInfo({ ...userInfo, confirmPassword: '' });
             }
+
         }
     }
 
     const handleRegister = e => {
         e.preventDefault();
+        if (userInfo.email && userInfo.password && userInfo.confirmPassword) {
+            createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+        }
     }
 
     return (
@@ -65,6 +88,7 @@ const SignUp = () => {
             <div className="row">
                 <div className="col-md-6 pb-5 pt-4 border-end pe-5">
                     <h1 className='fw-normal text-center text-uppercase mb-3 color'>Sign up</h1>
+                    {loading && <Loading />}
                     <form onSubmit={handleRegister}>
                         <div className="mb-3">
                             <label className='form-label fs-5' htmlFor="email">Email <span className='color'>*</span></label>
@@ -83,6 +107,7 @@ const SignUp = () => {
                         </div>
                         <input className='btn w-100 btn-lg btn-main text-uppercase' type="submit" value="Sign up" />
                     </form>
+                    {error && <p className='text-danger mb-0 mt-3'>{error.message}</p>}
                 </div>
                 <div className="col-md-6 text-center pt-4">
                     <h2>Already have an account?</h2>

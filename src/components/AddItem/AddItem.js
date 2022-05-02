@@ -1,9 +1,13 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
+import Loading from '../Loading/Loading';
 
 const AddItem = () => {
 
+    const [loading, setLoading] = useState(false)
+
     const handleAdd = event => {
+        setLoading(true);
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
@@ -16,15 +20,19 @@ const AddItem = () => {
         axios.post('https://hidden-taiga-61073.herokuapp.com/add-item', {
             name, email, img, supplier, price, quantity, short_des
         }).then(res => {
-            console.log(res)
+            console.log(res);
+            setLoading(false);
             event.target.reset();
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            console.error(err)
+            setLoading(false);
+        })
     }
 
     return (
         <div className='container'>
             <h1 className='color display-4 text-center my-4'>Add New Item</h1>
-            <form onSubmit={handleAdd}>
+            {loading ? <Loading /> : <form onSubmit={handleAdd}>
                 <div className="row">
                     <div className="col-md-6">
                         <div className="mb-3">
@@ -60,7 +68,7 @@ const AddItem = () => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </form>}
         </div>
     );
 };

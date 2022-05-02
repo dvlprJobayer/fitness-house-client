@@ -3,15 +3,45 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowRightSquare } from 'react-icons/bs';
 import { BsFillTrashFill } from 'react-icons/bs';
+import { IoMdCloseCircle } from 'react-icons/io';
+import Modal from 'react-modal';
+
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    },
+};
+
+Modal.setAppElement('#root');
 
 const ManageInventories = () => {
+
+    const [id, setId] = useState('');
+    const [modalIsOpen, setIsOpen] = useState(false);
+    function closeModal(bool) {
+        const remove = bool;
+        if (remove) {
+            axios.delete(`https://hidden-taiga-61073.herokuapp.com/inventory/${id}`).then(res => console.log(res.data))
+            const remaining = items.filter(item => item._id !== id);
+            setItems(remaining);
+        }
+        setIsOpen(false);
+    }
+    function openModal(id) {
+        setIsOpen(true);
+        setId(id);
+    }
 
     const [items, setItems] = useState([]);
     useEffect(() => {
         axios.get('https://hidden-taiga-61073.herokuapp.com/inventories').then(res => setItems(res.data))
     }, []);
-
-    console.log(items[6]);
 
     const navigate = useNavigate();
 
@@ -35,11 +65,23 @@ const ManageInventories = () => {
                             <td className='color'>${item.price}</td>
                             <td className='color ps-4'>{item.quantity}</td>
                             <td>{item.supplier}</td>
-                            <td><button className='btn btn-main'>Delete <BsFillTrashFill /></button></td>
+                            <td><button onClick={() => openModal(item._id)} className='btn btn-main'>Delete <BsFillTrashFill /></button></td>
                         </tr>)
                     }
                 </tbody>
             </table>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <h3>Are you sure you want to delete?</h3>
+                <div className='text-center mt-4'>
+                    <button className='btn btn-out-main me-4' onClick={() => closeModal(true)}>Delete <BsFillTrashFill /></button>
+                    <button className='btn btn-main' onClick={() => closeModal(false)}>Cancel <IoMdCloseCircle className='fs-5' /></button>
+                </div>
+            </Modal>
             <button className='btn btn-out-main w-25 mx-auto btn-lg d-block my-4' onClick={() => navigate('/add-item')}>Add New Item <BsArrowRightSquare className='ms-3' /></button>
         </div>
     );

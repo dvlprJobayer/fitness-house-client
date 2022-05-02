@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import Loading from '../Loading/Loading';
+import { BsArrowRightSquare } from 'react-icons/bs';
 
 const AddItem = () => {
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const handleAdd = event => {
         setLoading(true);
@@ -51,7 +52,6 @@ const AddItem = () => {
                             <label className="form-label">Quantity</label>
                             <input name='quantity' type="text" className="form-control" required />
                         </div>
-                        <button type="submit" className="btn btn-main btn-lg mt-3 w-50">Add Item</button>
                     </div>
                     <div className="col-md-6">
                         <div className="mb-3">
@@ -67,6 +67,10 @@ const AddItem = () => {
                             <input name='price' type="text" className="form-control" required />
                         </div>
                     </div>
+                    <div className="col-md-3">
+                        <button type="submit" className="btn btn-main btn-lg my-3 w-100">Add Item <BsArrowRightSquare className='ms-2' /></button>
+                    </div>
+                    <div className="col-md-9"></div>
                 </div>
             </form>}
         </div>

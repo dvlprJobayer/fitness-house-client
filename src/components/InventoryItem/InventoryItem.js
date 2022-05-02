@@ -34,11 +34,12 @@ const InventoryItem = () => {
     return (
         <div className="container my-4">
             <div className="row align-items-center">
-                <div className="col-lg-5">
-                    <img style={{ objectFit: 'contain' }} src={item.img} alt="" width={350} />
+                <div className="col-lg-4 mb-3 mb-lg-0">
+                    <img style={{ objectFit: 'contain' }} src={item.img} alt="" className='img-fluid' />
                 </div>
+                <div className="col-lg-1"></div>
                 <div className="col-lg-7 text-center">
-                    <h3 className='mt-2'>{item.name}</h3>
+                    <h2 className='mt-2'>{item.name}</h2>
                     <p>{item.short_des}</p>
                     <table className="table table-inventory">
                         <thead>
@@ -72,18 +73,18 @@ const InventoryItem = () => {
             <div className="row">
                 <h3 className='text-center display-5 fw-normal color mt-4'>ReStock the Item?</h3>
                 <div className="col-lg-3"></div>
-                <div className="col-lg-4">
+                <div className="col-lg-4 col-md-6">
                     <Form onSubmit={addQuantity}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Put a Quantity</Form.Label>
                             <Form.Control name='quantity' type="text" placeholder="Put a Quantity" autoComplete='off' />
                         </Form.Group>
-                        <button className='btn btn-out-main btn-lg w-100'>Submit</button>
+                        <button className='btn btn-out-main btn-lg w-100'>Increase Quantity</button>
                     </Form>
                 </div>
-                <div className="col-lg-1"></div>
-                <div className="col-lg-4 d-flex align-items-end">
-                    <Link className='btn btn-main btn-lg mt-4 w-100' to="/inventories">Manage Inventories <BsArrowRightSquare className='ms-3' /></Link>
+                <div className="col-lg-1 d-lg-block d-none"></div>
+                <div className="col-lg-4 col-md-6 d-flex align-items-end">
+                    <Link className='btn btn-main btn-lg mt-4 w-100' to="/inventories">Manage Inventories <BsArrowRightSquare className='ms-2' /></Link>
                 </div>
             </div>
         </div>

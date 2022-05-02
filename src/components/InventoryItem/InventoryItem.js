@@ -40,7 +40,7 @@ const InventoryItem = () => {
                 <div className="col-lg-7 text-center">
                     <h3 className='mt-2'>{item.name}</h3>
                     <p>{item.short_des}</p>
-                    <table className="table">
+                    <table className="table table-inventory">
                         <thead>
                             <tr>
                                 <td>Product id</td>

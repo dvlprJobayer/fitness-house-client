@@ -68,7 +68,7 @@ const AddItem = () => {
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <button type="submit" className="btn btn-main btn-lg my-3 w-100">Add Item <BsArrowRightSquare className='ms-2' /></button>
+                        <button type="submit" className="btn btn-main btn-lg mt-3 mb-4 w-100">Add Item <BsArrowRightSquare className='ms-2' /></button>
                     </div>
                     <div className="col-md-9"></div>
                 </div>

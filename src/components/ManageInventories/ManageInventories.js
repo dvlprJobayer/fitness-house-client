@@ -6,6 +6,8 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import { IoMdCloseCircle } from 'react-icons/io';
 import Loading from '../Loading/Loading';
 import Modal from 'react-modal';
+import { Row } from 'react-bootstrap';
+import SingleItem from '../SingleItem/SingleItem';
 
 
 const customStyles = {
@@ -55,29 +57,42 @@ const ManageInventories = () => {
         <div className='container'>
             {
                 loading ? <Loading /> :
-                    <table className="table mt-4">
-                        <thead>
-                            <tr>
-                                <th scope="col" className='ps-4'>Picture</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Supplier Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                items.map(item => <tr key={item._id}>
-                                    <td><img style={{ objectFit: 'contain' }} height={80} width={100} src={item.img} alt="" /></td>
-                                    <td className='fw-bold'>{item.name}</td>
-                                    <td className='color'>${item.price}</td>
-                                    <td className='color ps-4'>{item.quantity}</td>
-                                    <td>{item.supplier}</td>
-                                    <td><button onClick={() => openModal(item._id)} className='btn btn-main'>Delete <BsFillTrashFill /></button></td>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
+                    <>
+                        <div className='d-none d-lg-block'>
+                            <table className="table mt-4">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" className='ps-4'>Picture</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Supplier Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        items.map(item => <tr key={item._id}>
+                                            <td><img style={{ objectFit: 'contain' }} height={80} width={100} src={item.img} alt="" /></td>
+                                            <td className='fw-bold'>{item.name}</td>
+                                            <td className='color'>${item.price}</td>
+                                            <td className='color ps-4'>{item.quantity}</td>
+                                            <td>{item.supplier}</td>
+                                            <td><button onClick={() => openModal(item._id)} className='btn btn-main'>Delete <BsFillTrashFill /></button></td>
+                                        </tr>)
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="d-block d-lg-none">
+                            <Row xs={1} md={2} className="g-4 mt-3">
+                                {
+                                    items.map(item => <SingleItem key={item._id} item={item}>
+                                        <button onClick={() => openModal(item._id)} className='btn btn-main btn-lg w-100'>Delete <BsFillTrashFill /></button>
+                                    </SingleItem>)
+                                }
+                            </Row>
+                        </div>
+                    </>
             }
             <Modal
                 isOpen={modalIsOpen}
@@ -91,7 +106,13 @@ const ManageInventories = () => {
                     <button className='btn btn-main' onClick={() => closeModal(false)}>Cancel <IoMdCloseCircle className='fs-5' /></button>
                 </div>
             </Modal>
-            <button className='btn btn-out-main w-25 mx-auto btn-lg d-block my-4' onClick={() => navigate('/add-item')}>Add New Item <BsArrowRightSquare className='ms-3' /></button>
+            <div className="row">
+                <div className="col-md-4"></div>
+                <div className="col-md-4">
+                    <button className='btn btn-out-main btn-lg my-4 w-100' onClick={() => navigate('/add-item')}>Add New Item <BsArrowRightSquare className='ms-2' /></button>
+                </div>
+                <div className="col-md-4"></div>
+            </div>
         </div>
     );
 };

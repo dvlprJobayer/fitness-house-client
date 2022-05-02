@@ -1,12 +1,9 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 
-const SingleItem = ({ item }) => {
+const SingleItem = ({ item, children }) => {
 
-    const { img, name, price, short_des, quantity, supplier, _id } = item;
-
-    const navigate = useNavigate();
+    const { img, name, price, short_des, quantity, supplier } = item;
 
     return (
         <Col>
@@ -22,7 +19,7 @@ const SingleItem = ({ item }) => {
                     <h5>Price: <span className="color">${price}</span></h5>
                     <p className='mb-2'>Quantity: <span className="color fw-bold">{quantity}</span></p>
                     <h5>Supplier: <span className="color">{supplier}</span></h5>
-                    <button onClick={() => navigate('/inventory/' + _id)} className='btn btn-lg btn-out-main mt-2 w-100'>Manage</button>
+                    {children}
                 </div>
             </Card>
         </Col>

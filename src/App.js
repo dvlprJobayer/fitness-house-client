@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddItem from './components/AddItem/AddItem';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import InventoryItem from './components/InventoryItem/InventoryItem';
@@ -39,6 +40,7 @@ function App() {
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
+            <Footer />
         </>
     );
 }

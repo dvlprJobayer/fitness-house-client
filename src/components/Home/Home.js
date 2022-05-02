@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Banner from '../Banner/Banner';
 import SingleItem from '../SingleItem/SingleItem';
 import { BsArrowRightSquare } from 'react-icons/bs';
@@ -21,6 +21,8 @@ const Home = () => {
         })
     }, []);
 
+    const navigate = useNavigate();
+
     return (
         <div>
             <Banner />
@@ -30,7 +32,9 @@ const Home = () => {
                     loading ? <Loading /> :
                         <Row xs={1} md={2} lg={3} className="g-4">
                             {
-                                items.map(item => <SingleItem key={item._id} item={item} />)
+                                items.map(item => <SingleItem key={item._id} item={item}>
+                                    <button onClick={() => navigate('/inventory/' + item._id)} className='btn btn-lg btn-out-main mt-2 w-100'>Manage</button>
+                                </SingleItem>)
                             }
                         </Row>
                 }

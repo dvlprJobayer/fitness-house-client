@@ -1,0 +1,65 @@
+.carousel .slide img {
+    width: 139px;
+    height: 139px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.carousel p:before {
+    content: "“";
+    color: #e73c3e;
+    font-size: 26px;
+    font-family: monospace;
+    font-weight: 100;
+}
+
+.carousel p:after {
+    content: "”";
+    color: #e73c3e;
+    font-size: 26px;
+    font-family: monospace;
+    font-weight: 100;
+    line-height: 0;
+}
+
+.carousel p {
+    width: 50%;
+    margin: 0 auto 1rem;
+}
+
+.myCarousel h5 {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #787878;
+    font-size: 16px;
+}
+
+.carousel .control-dots {
+    bottom: 2%;
+}
+
+.myCarousel {
+    padding-top: 1%;
+    padding-bottom: 5%;
+}
+
+.carousel .control-dots .dot {
+    box-shadow: none;
+    background: #e73c3e;
+}
+
+.carousel.carousel-slider .control-arrow {
+    background: #e73c3e !important;
+    height: 50px;
+    top: 35%;
+}
+
+@media screen and (max-width: 768px) {
+    .carousel p {
+        width: 100%;
+    }
+
+    .carousel .control-dots {
+        bottom: 0;
+    }
+}

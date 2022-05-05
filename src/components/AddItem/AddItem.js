@@ -2,8 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Loading from '../Loading/Loading';
 import { BsArrowRightSquare } from 'react-icons/bs';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase/Firebase.init';
 
 const AddItem = () => {
+
+    const [user] = useAuthState(auth);
 
     const [loading, setLoading] = useState(false);
 
@@ -56,7 +60,7 @@ const AddItem = () => {
                     <div className="col-md-6">
                         <div className="mb-3">
                             <label className="form-label">Email</label>
-                            <input name='email' type="email" className="form-control" />
+                            <input name='email' value={user.email} type="email" className="form-control" readOnly />
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Description</label>

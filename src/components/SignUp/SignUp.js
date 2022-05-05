@@ -5,6 +5,7 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.init';
 import Loading from '../Loading/Loading';
+import axios from 'axios';
 
 const SignUp = () => {
 
@@ -21,6 +22,9 @@ const SignUp = () => {
     useEffect(() => {
         if (user) {
             navigate(from, { replace: true });
+            axios.post('http://localhost:5000/get-token', { email: user.user.email }).then(res => {
+                localStorage.setItem('token', res.data.token);
+            })
         }
     }, [user, navigate, from]);
 
@@ -84,29 +88,31 @@ const SignUp = () => {
     }
 
     return (
-        <div className='container mt-3'>
+        <div className='container mt-3 mb-4 pb-3'>
             <div className="row">
                 <div className="col-md-6 pb-5 pt-4 border-end pe-5">
                     <h1 className='fw-normal text-center text-uppercase mb-3 color'>Sign up</h1>
-                    {loading && <Loading />}
-                    <form onSubmit={handleRegister}>
-                        <div className="mb-3">
-                            <label className='form-label fs-5' htmlFor="email">Email <span className='color'>*</span></label>
-                            <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='email' type="email" name='email' required />
-                            {userError.email && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.email}</p>}
-                        </div>
-                        <div className="mb-3">
-                            <label className='form-label fs-5' htmlFor="password">Password <span className='color'>*</span></label>
-                            <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='password' type="password" name='password' required />
-                            {userError.password && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.password}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <label className='form-label fs-5' htmlFor="confirm-password">Confirm Password <span className='color'>*</span></label>
-                            <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='confirm-password' type="password" name='confirmPassword' required />
-                            {userError.confirmPassword && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.confirmPassword}</p>}
-                        </div>
-                        <input className='btn w-100 btn-lg btn-main text-uppercase' type="submit" value="Sign up" />
-                    </form>
+                    {
+                        loading ? <Loading /> :
+                            <form onSubmit={handleRegister}>
+                                <div className="mb-3">
+                                    <label className='form-label fs-5' htmlFor="email">Email <span className='color'>*</span></label>
+                                    <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='email' type="email" name='email' required />
+                                    {userError.email && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.email}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className='form-label fs-5' htmlFor="password">Password <span className='color'>*</span></label>
+                                    <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='password' type="password" name='password' required />
+                                    {userError.password && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.password}</p>}
+                                </div>
+                                <div className="mb-4">
+                                    <label className='form-label fs-5' htmlFor="confirm-password">Confirm Password <span className='color'>*</span></label>
+                                    <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='confirm-password' type="password" name='confirmPassword' required />
+                                    {userError.confirmPassword && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.confirmPassword}</p>}
+                                </div>
+                                <input className='btn w-100 btn-lg btn-main text-uppercase' type="submit" value="Sign up" />
+                            </form>
+                    }
                     {error && <p className='text-danger mb-0 mt-3'>{error.message}</p>}
                 </div>
                 <div className="col-md-6 text-center pt-4">

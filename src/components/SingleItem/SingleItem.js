@@ -11,8 +11,8 @@ const SingleItem = ({ item, children }) => {
                 <Card.Img variant="top" height={250} src={img} style={{ objectFit: 'cover' }} />
                 <Card.Body>
                     <Card.Title className='color'>{name}</Card.Title>
-                    <Card.Text>
-                        {short_des}
+                    <Card.Text title={short_des}>
+                        {short_des.slice(0, 70)}...
                     </Card.Text>
                 </Card.Body>
                 <div className="px-3 pb-3">

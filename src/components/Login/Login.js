@@ -5,7 +5,7 @@ import LoginForm from '../LoginForm/LoginForm';
 
 const Login = () => {
     return (
-        <div className='container mt-3'>
+        <div className='container mt-3 mb-5 pb-5'>
             <div className="row">
                 <div className="col-md-6 pb-5 pt-4 border-end pe-5">
                     <LoginForm>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
@@ -64,26 +65,31 @@ const LoginForm = ({ children }) => {
     useEffect(() => {
         if (user) {
             navigate(from, { replace: true });
+            axios.post('http://localhost:5000/get-token', { email: user.user.email }).then(res => {
+                localStorage.setItem('token', res.data.token);
+            })
         }
     }, [user, from, navigate]);
 
     return (
         <>
             {children}
-            {loading && <Loading />}
-            <form onSubmit={handleLogin}>
-                <div className="mb-3">
-                    <label className='form-label fs-5' htmlFor="email">Email <span className='color'>*</span></label>
-                    <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='email' type="email" name='email' required />
-                    {userError.email && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.email}</p>}
-                </div>
-                <div className="mb-4">
-                    <label className='form-label fs-5' htmlFor="password">Password <span className='color'>*</span></label>
-                    <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='password' type="password" name='password' required />
-                    {userError.password && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.password}</p>}
-                </div>
-                <input className='btn w-100 btn-lg btn-main text-uppercase' type="submit" value="Login" />
-            </form>
+            {
+                loading ? <Loading /> :
+                    <form onSubmit={handleLogin}>
+                        <div className="mb-3">
+                            <label className='form-label fs-5' htmlFor="email">Email <span className='color'>*</span></label>
+                            <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='email' type="email" name='email' required />
+                            {userError.email && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.email}</p>}
+                        </div>
+                        <div className="mb-4">
+                            <label className='form-label fs-5' htmlFor="password">Password <span className='color'>*</span></label>
+                            <input onChange={(e) => handleFormInput(e)} className='form-control fs-5' id='password' type="password" name='password' required />
+                            {userError.password && <p className='text-danger mt-2'><AiOutlineExclamationCircle className='mb-1' /> {userError.password}</p>}
+                        </div>
+                        <input className='btn w-100 btn-lg btn-main text-uppercase' type="submit" value="Login" />
+                    </form>
+            }
             {error && <p className='text-danger mb-0 mt-3'>{error.message}</p>}
             <p className='mt-3 mb-0 color text-center' style={{ cursor: 'pointer' }}>Lost your password?</p>
         </>

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsArrowRightSquare } from 'react-icons/bs';
 import { BsFillTrashFill } from 'react-icons/bs';
+import { FiRefreshCcw } from 'react-icons/fi';
 import { IoMdCloseCircle } from 'react-icons/io';
 import Loading from '../Loading/Loading';
 import Modal from 'react-modal';
@@ -55,6 +56,7 @@ const ManageInventories = () => {
 
     return (
         <div className='container'>
+            <h2 className='text-center color display-4 mt-2'>Total Items: {items.length}</h2>
             {
                 loading ? <Loading /> :
                     <>
@@ -77,7 +79,7 @@ const ManageInventories = () => {
                                             <td className='color'>${item.price}</td>
                                             <td className='color ps-4'>{item.quantity}</td>
                                             <td>{item.supplier}</td>
-                                            <td><button onClick={() => openModal(item._id)} className='btn btn-main'>Delete <BsFillTrashFill /></button></td>
+                                            <td><Link to={`/inventory/${item._id}`} className='btn btn-out-main'>Update <FiRefreshCcw /></Link> <button onClick={() => openModal(item._id)} className='btn btn-main ms-3'>Delete <BsFillTrashFill /></button></td>
                                         </tr>)
                                     }
                                 </tbody>
@@ -87,7 +89,10 @@ const ManageInventories = () => {
                             <Row xs={1} md={2} className="g-4 mt-3">
                                 {
                                     items.map(item => <SingleItem key={item._id} item={item}>
-                                        <button onClick={() => openModal(item._id)} className='btn btn-main btn-lg w-100'>Delete <BsFillTrashFill /></button>
+                                        <div className='mt-3'>
+                                            <Link to={`/inventory/${item._id}`} className='btn btn-out-main'>Update <FiRefreshCcw /></Link>
+                                            <button onClick={() => openModal(item._id)} className='btn btn-main ms-3'>Delete <BsFillTrashFill /></button>
+                                        </div>
                                     </SingleItem>)
                                 }
                             </Row>

@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddItem from './components/AddItem/AddItem';
+import Blogs from './components/Blogs/Blogs';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -20,7 +21,11 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/inventories' element={<ManageInventories />} />
-                <Route path='/inventory/:id' element={<InventoryItem />} />
+                <Route path='/inventory/:id' element={
+                    <RequireAuth>
+                        <InventoryItem />
+                    </RequireAuth>
+                } />
                 <Route path='/manage' element={
                     <RequireAuth>
                         <ManageItems />
@@ -36,6 +41,7 @@ function App() {
                         <MyItems />
                     </RequireAuth>
                 } />
+                <Route path='/blogs' element={<Blogs />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='*' element={<NotFound />} />

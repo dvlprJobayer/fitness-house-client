@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar className='navbar light' expand="lg">
+            <Navbar className='navbar light shadow-sm' expand="lg">
                 <Container>
                     <Navbar.Brand className='fs-4 fw-bold mb-lg-1' as={Link} to="/">Fitness House</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -44,6 +44,7 @@ const Header = () => {
                                     <Nav.Link className='fw-bold text-black' as={NavLink} to="/my-items">My Items</Nav.Link>
                                 </>
                             }
+                            <Nav.Link className='fw-bold text-black' as={NavLink} to="/blogs">Blogs</Nav.Link>
                         </Nav>
                         <div>
                             {user && <p onClick={() => signOut(auth)} className="mb-0 color fw-bold" style={{ cursor: 'pointer' }}>Sign Out</p>}

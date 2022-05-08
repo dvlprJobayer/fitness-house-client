@@ -6,6 +6,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.init';
 import Loading from '../Loading/Loading';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignUp = () => {
 
@@ -14,7 +15,9 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {
+        sendEmailVerification: true
+    });
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,9 +25,9 @@ const SignUp = () => {
     useEffect(() => {
         if (user) {
             navigate(from, { replace: true });
-            axios.post('http://localhost:5000/get-token', { email: user.user.email }).then(res => {
+            axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email }).then(res => {
                 localStorage.setItem('token', res.data.token);
-            })
+            });
         }
     }, [user, navigate, from]);
 
@@ -84,6 +87,7 @@ const SignUp = () => {
         e.preventDefault();
         if (userInfo.email && userInfo.password && userInfo.confirmPassword) {
             createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+            toast.success('Verification Email sent');
         }
     }
 
@@ -121,6 +125,7 @@ const SignUp = () => {
                     <SocialLogin />
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };

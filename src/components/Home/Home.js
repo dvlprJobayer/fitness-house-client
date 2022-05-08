@@ -62,7 +62,7 @@ const Home = () => {
                     <span style={{ height: 4, width: 80, backgroundColor: '#e73c3e' }}></span>
                 </div>
                 <div className="row mb-4">
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 mb-2">
                         <div className="d-flex">
                             <BsFillCartCheckFill className='color display-3' />
                             <div className="ms-3">
@@ -71,9 +71,9 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 mb-2">
                         <div className="d-flex">
-                            <BsFillChatDotsFill className='color display-6' />
+                            <BsFillChatDotsFill className='color display-4' />
                             <div className='ms-3'>
                                 <h6>TRUSTED BY THOUSANDS</h6>
                                 <p>Trusted by a community of thousands of users.</p>

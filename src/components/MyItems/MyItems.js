@@ -31,7 +31,7 @@ const MyItems = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     function closeModal(bool) {
         const remove = bool;
-        if (remove) {
+        if (remove === true) {
             axios.delete(`https://hidden-taiga-61073.herokuapp.com/inventory/${id}`).then(res => console.log(res.data))
             const remaining = items.filter(item => item._id !== id);
             setItems(remaining);
@@ -49,7 +49,7 @@ const MyItems = () => {
 
     const [items, setItems] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/my-items?email=${user.email}`, {
+        axios.get(`https://hidden-taiga-61073.herokuapp.com/my-items?email=${user.email}`, {
             headers: {
                 auth: `Bearer ${localStorage.getItem('token')}`
             }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import toast, { Toaster } from 'react-hot-toast';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
@@ -14,6 +15,8 @@ const LoginForm = ({ children }) => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
 
     const [userInfo, setUserInfo] = useState({
         email: '',
@@ -59,13 +62,20 @@ const LoginForm = ({ children }) => {
         }
     }
 
+    const forgetPassword = async () => {
+        if (userInfo.email) {
+            await sendPasswordResetEmail(userInfo.email);
+            toast.success('Reset Password option sent on your email');
+        }
+    }
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         if (user) {
             navigate(from, { replace: true });
-            axios.post('http://localhost:5000/get-token', { email: user.user.email }).then(res => {
+            axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email }).then(res => {
                 localStorage.setItem('token', res.data.token);
             })
         }
@@ -91,7 +101,12 @@ const LoginForm = ({ children }) => {
                     </form>
             }
             {error && <p className='text-danger mb-0 mt-3'>{error.message}</p>}
-            <p className='mt-3 mb-0 color text-center' style={{ cursor: 'pointer' }}>Lost your password?</p>
+            {
+                sending ? <Loading /> :
+                    <p onClick={forgetPassword} className='mt-3 mb-0 color text-center' style={{ cursor: 'pointer' }}>Lost your password?</p>
+            }
+            {resetError && <p className='text-danger mb-0 mt-3'>{resetError.message}</p>}
+            <Toaster />
         </>
     );
 };

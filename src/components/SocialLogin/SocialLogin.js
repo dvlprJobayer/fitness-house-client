@@ -4,21 +4,23 @@ import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import axios from 'axios';
 
-const SocialLogin = ({ children, handleCanvasClose }) => {
+const SocialLogin = ({ children }) => {
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
     const location = useLocation();
     const navigate = useNavigate();
-
+    const from = location.state?.from?.pathname || "/";
     useEffect(() => {
-        if (user && (location.pathname === '/login' || location.pathname === '/signup')) {
-            navigate('/');
-        } else if (user) {
-            handleCanvasClose(false);
+        if (user) {
+            navigate(from, { replace: true });
+            axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email }).then(res => {
+                localStorage.setItem('token', res.data.token);
+            })
         }
-    }, [user, handleCanvasClose, location, navigate]);
+    }, [user, from, navigate]);
     useEffect(() => {
         if (loading) {
             <Loading />

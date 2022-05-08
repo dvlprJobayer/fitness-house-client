@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsArrowRightSquare } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
     return (
@@ -10,7 +11,7 @@ const NotFound = () => {
                 </div>
                 <div className="col-md-6">
                     <h2>Oops, This Page Could Not Be Found!</h2>
-                    <button className='mt-4 btn btn-main btn-lg'>Go to Homepage<BsArrowRightSquare className='ms-3' /></button>
+                    <Link to="/" className='mt-4 btn btn-main btn-lg'>Go to Homepage<BsArrowRightSquare className='ms-3' /></Link>
                 </div>
             </div>
         </div>

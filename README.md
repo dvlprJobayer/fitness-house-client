@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Project Name: Fitness House
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description: 
+This is a Gym Equipment inventory website where stock many type of Gym Equipment. If you create an account you can add Item in inventory. you can update your inventory item and also you can delete them.
 
-## Available Scripts
+## Live Project: [https://fitness-house-2e9fe.web.app/](https://fitness-house-2e9fe.web.app/).
 
-In the project directory, you can run:
+## Project features and functionality:
 
-### `npm start`
+* The website has mainly seven route which is (Home, Manage Inventories, Add Item, My Items, Blogs, Login and SignUp).
+* Default Manage Inventories, Add Item, My Items Menu Item will hide when user login or sign up then user will see hide menu items.
+* If a user login or sign up server will create a jwt token and set up user browser's local storage after that when user login and go to my-items route verify user in server with jwt token.
+* If a user login or sign up then login button will hide and show the sign out button.
+* If a user login or sign up user automatically redirect to homepage.
+* The website has a private route component named InventoryItem. if a user without login access to that route user automatically redirect to login page. if a user login then user can navigate Inventory/:id route.
+* if a user forget password user can reset password through the login page. login page has a option reset password. if the user click the option user have a link through email. if user click the link user see a option to set a new password.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## The technology used in the project is mentioned below:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* React
+* React Router
+* React firebase hooks
+* Firebase
+* React Bootstrap
+* React Icons
+* React hot toast
+* json web token
+* express
+* mongodb

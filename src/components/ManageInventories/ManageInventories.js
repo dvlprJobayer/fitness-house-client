@@ -32,7 +32,7 @@ const ManageInventories = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     function closeModal(bool) {
         const remove = bool;
-        if (remove) {
+        if (remove === true) {
             axios.delete(`https://hidden-taiga-61073.herokuapp.com/inventory/${id}`).then(res => console.log(res.data))
             const remaining = items.filter(item => item._id !== id);
             setItems(remaining);
@@ -114,7 +114,7 @@ const ManageInventories = () => {
             <div className="row">
                 <div className="col-md-4"></div>
                 <div className="col-md-4">
-                    <button className='btn btn-out-main btn-lg my-4 w-100' onClick={() => navigate('/add-item')}>Add New Item <BsArrowRightSquare className='ms-2' /></button>
+                    <button className='btn btn-out-main btn-lg mt-3 mb-4 w-100' onClick={() => navigate('/add-item')}>Add New Item <BsArrowRightSquare className='ms-2' /></button>
                 </div>
                 <div className="col-md-4"></div>
             </div>

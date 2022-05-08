@@ -36,10 +36,9 @@ const Header = () => {
                         <Nav
                             className="me-auto ms-lg-4 my-lg-0"
                         >
-                            <Nav.Link className='fw-bold text-black' as={NavLink} to="/inventories">Manage Inventories</Nav.Link>
                             {
                                 user && <>
-                                    <Nav.Link className='fw-bold text-black' as={NavLink} to="/manage">Manage Items</Nav.Link>
+                                    <Nav.Link className='fw-bold text-black' as={NavLink} to="/inventories">Manage Inventories</Nav.Link>
                                     <Nav.Link className='fw-bold text-black' as={NavLink} to="/add-item">Add Item</Nav.Link>
                                     <Nav.Link className='fw-bold text-black' as={NavLink} to="/my-items">My Items</Nav.Link>
                                 </>

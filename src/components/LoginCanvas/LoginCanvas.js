@@ -24,7 +24,7 @@ const LoginCanvas = () => {
                     <div className="px-3 pt-3">
                         <LoginForm />
                     </div>
-                    <SocialLogin handleCanvasClose={handleCanvasClose}>
+                    <SocialLogin>
                         <div className="text-center mt-3">
                             <FiUser className='fs-1' />
                             <p>No account yet?</p>

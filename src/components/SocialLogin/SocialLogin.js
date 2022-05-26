@@ -15,10 +15,10 @@ const SocialLogin = ({ children }) => {
     const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         if (user) {
-            navigate(from, { replace: true });
             axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email }).then(res => {
                 localStorage.setItem('token', res.data.token);
-            })
+                navigate(from, { replace: true });
+            });
         }
     }, [user, from, navigate]);
     useEffect(() => {

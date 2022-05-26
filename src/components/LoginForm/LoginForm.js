@@ -74,10 +74,12 @@ const LoginForm = ({ children }) => {
     const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         if (user) {
-            navigate(from, { replace: true });
-            axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email }).then(res => {
-                localStorage.setItem('token', res.data.token);
-            })
+            async function setToken() {
+                const { data } = await axios.post('https://hidden-taiga-61073.herokuapp.com/get-token', { email: user.user.email });
+                await localStorage.setItem('token', data.token);
+                await navigate(from, { replace: true });
+            }
+            setToken();
         }
     }, [user, from, navigate]);
 

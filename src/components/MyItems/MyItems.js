@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import SingleItem from '../SingleItem/SingleItem';
 import { BsFillTrashFill } from 'react-icons/bs';
@@ -25,7 +25,7 @@ const customStyles = {
 
 const MyItems = () => {
 
-    const navigate = useNavigate();
+    const location = useLocation();
 
     const [id, setId] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -59,12 +59,12 @@ const MyItems = () => {
             console.log(err.message);
             if (err.response.status === 401 || err.response.status === 403) {
                 signOut(auth);
-                navigate('/login');
+                <Navigate to="/login" state={{ from: location }} replace />;
             }
         }).then(() => {
             setLoading(false);
         })
-    }, [user, navigate]);
+    }, [user, location]);
 
     return (
         <div className='min-vh-100 container'>
